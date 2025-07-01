@@ -6,26 +6,37 @@
   <title>Happy Doctor’s Day Akka</title>
   <style>
     body {
+      margin: 0;
+      padding: 0;
       background-color: #fdeff2;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
+      overflow: hidden;
       font-family: Arial, sans-serif;
-      overflow-x: hidden;
     }
+
     img {
-      width: auto;
       max-width: 90%;
       max-height: 80vh;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       object-fit: contain;
+      animation: fadeIn 2s ease-in-out;
     }
+
+    h2 {
+      margin-top: 15px;
+      color: #d81b60;
+      font-size: 1.4rem;
+      animation: fadeInText 3s ease-in-out infinite alternate;
+    }
+
     .btn {
       margin-top: 20px;
+      margin-left: 20px; /* ✅ This moves the button slightly to the right */
       padding: 12px 25px;
       background-color: #d81b60;
       color: white;
@@ -33,19 +44,82 @@
       border-radius: 25px;
       font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s;
       text-decoration: none;
+      box-shadow: 0 0 10px #d81b60;
+      transition: all 0.3s ease;
     }
+
     .btn:hover {
       background-color: #ad1457;
+      box-shadow: 0 0 20px #ad1457;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeInText {
+      from { opacity: 0.5; }
+      to { opacity: 1; }
+    }
+
+    /* Floating Hearts Animation */
+    .heart {
+      position: fixed;
+      width: 15px;
+      height: 15px;
+      background-color: #ff4081;
+      left: 50%;
+      top: 100vh;
+      transform: translateX(-50%) rotate(45deg);
+      animation: floatUp 5s linear infinite;
+      opacity: 0.6;
+    }
+
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background-color: #ff4081;
+      border-radius: 50%;
+    }
+    .heart::before { top: -7.5px; left: 0; }
+    .heart::after { left: -7.5px; top: 0; }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-800px) scale(1.5);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
 
-<img src="doctor-day-banner.png" alt="Doctor's Day Banner">
+<img src="doctor-day-banner.png" alt="Happy Doctor's Day">
 
-<a href="page2.html" class="btn">Click for a Doctor’s Day Surprise ❤️</a>
+<h2>For the one who heals hearts and lives... ❤️</h2>
+
+<a href="page2.html" class="btn">Click for a Doctor’s Day Surprise 🎉</a>
+
+<script>
+  // Floating hearts generator
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }, 500);
+</script>
 
 </body>
 </html>
