@@ -3,176 +3,225 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Thank You Akka ❤️</title>
+  <title>Thank You Akka - Doctor’s Day Special ❤️</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #f8bbd0, #f48fb1, #f06292);
-      background-size: 600% 600%;
-      animation: gradient 10s ease infinite;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e3f2fd, #fce4ec, #f8bbd0);
+      background-size: 500% 500%;
+      animation: bgFade 20s ease infinite;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
       text-align: center;
       min-height: 100vh;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    h1 {
-      color: white;
-      font-size: 3rem;
-      margin: 20px;
-      text-shadow: 2px 2px 8px #d81b60;
-      animation: fadeIn 3s ease-out;
-    }
-
-    .quote {
-      color: white;
-      font-size: 1.4rem;
-      margin: 15px;
-      max-width: 80%;
-      opacity: 0;
-      animation: fadeInQuote 3s ease-in-out forwards;
-    }
-
-    @keyframes gradient {
+    @keyframes bgFade {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
+    h1 {
+      font-size: 2rem;
+      margin-top: 20px;
+      background: linear-gradient(90deg, #d81b60, #1976d2);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .heartbeat {
+      width: 60px;
+      height: 60px;
+      margin: 10px auto;
+      animation: beat 1s infinite;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+
+    img {
+      max-width: 85%;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      margin: 10px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    img:nth-of-type(2) {
+      max-width: 50%;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #typeText {
+      color: #424242;
+      font-size: 1.05rem;
+      margin: 15px 25px;
+      max-width: 90%;
+      white-space: pre-wrap;
+      line-height: 1.6;
+      background: rgba(255,255,255,0.9);
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      opacity: 0;
+      animation: fadeInText 1s ease forwards 2s;
+    }
+
+    @keyframes fadeInText {
       to { opacity: 1; }
     }
 
-    @keyframes fadeInQuote {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .heart {
+    .particle, .emoji {
       position: fixed;
-      width: 20px;
-      height: 20px;
-      background-color: #ff4081;
-      left: 50%;
       top: 100vh;
-      transform: translateX(-50%) rotate(45deg);
-      animation: floatUp 8s linear infinite;
-      opacity: 0.6;
+      left: 50%;
       z-index: 1;
+      pointer-events: none;
     }
 
-    .heart::before, .heart::after {
-      content: "";
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: #ff4081;
+    .particle {
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.6);
+      animation: floatUp 8s linear infinite;
     }
-    .heart::before { top: -10px; left: 0; }
-    .heart::after { left: -10px; top: 0; }
+
+    .emoji {
+      font-size: 1.4rem;
+      animation: floatUpEmoji 7s ease-out infinite;
+    }
 
     @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-1000px); opacity: 0; }
+    }
+
+    @keyframes floatUpEmoji {
       0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-1000px) scale(1.5); opacity: 0; }
+      100% { transform: translateY(-800px) scale(1.5); opacity: 0; }
+    }
+
+    .music-controls {
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      display: flex;
+      gap: 8px;
+      z-index: 999;
+    }
+
+    .music-controls button {
+      background-color: #d81b60;
+      border: none;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      box-shadow: 0 0 6px #d81b60;
     }
 
     .back-btn {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      padding: 10px 18px;
-      background-color: #d81b60;
+      padding: 8px 14px;
+      background-color: #1976d2;
       color: white;
       border: none;
-      border-radius: 20px;
+      border-radius: 10px;
       text-decoration: none;
-      box-shadow: 0 0 8px #d81b60;
-      cursor: pointer;
+      box-shadow: 0 0 8px #1976d2;
+      font-size: 0.85rem;
       z-index: 999;
-    }
-    .back-btn:hover {
-      background-color: #ad1457;
-      box-shadow: 0 0 12px #ad1457;
     }
   </style>
 </head>
 <body>
 
-<h1>❤️ Thank You Akka ❤️</h1>
+<svg class="heartbeat" viewBox="0 0 32 29.6">
+  <path fill="#e91e63" d="M23.6,0c-3.4,0-6.4,1.8-8,4.5C13.8,1.8,10.8,0,7.4,0C3.1,0,0,3.1,0,7.4c0,4.8,4.1,8.7,10.3,14.3l5.3,4.8l5.3-4.8
+  C27.9,16.1,32,12.2,32,7.4C32,3.1,28.9,0,24.6,0H23.6z"/>
+</svg>
 
-<div id="quotes"></div>
+<h1>Happy Doctor’s Day Akka 🎉</h1>
+
+<img src="doctor-thankyou.png" alt="Thank You Doctor Image">
+<img src="thankyou-badge.png" alt="Thank You Badge">
+
+<div id="typeText"></div>
 
 <audio id="bgMusic" src="doctor-ending.mp3" autoplay loop></audio>
 
 <a href="index.html" class="back-btn">⬅️ Home</a>
 
 <script>
-  // Confetti rain
-  function confettiRain() {
-    const duration = 8000;
-    const end = Date.now() + duration;
+  const text = "Dear Akka,\n\nBehind every healed patient, there’s a doctor who cares…\nBehind every smiling family, there’s a doctor who comforts…\n\nAnd behind all of that… there’s YOU ❤️\n\nThank you for being our constant support, our hero in a white coat.\n\nHappy Doctor’s Day! 🌸";
+  let index = 0;
 
-    (function frame() {
-      confetti({
-        particleCount: 3,
-        angle: 90,
-        spread: 360,
-        origin: { x: Math.random(), y: Math.random() / 2 },
-      });
-      if (Date.now() < end) {
-        requestAnimationFrame(frame);
-      }
-    })();
-  }
-  confettiRain();
-
-  // Floating hearts
-  setInterval(() => {
-    const heart = document.createElement('div');
-    heart.className = 'heart';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 9000);
-  }, 600);
-
-  // Inspirational Quotes fade-in
-  const quotesList = [
-    "🌸 'Wherever the art of medicine is loved, there is also love for humanity.'",
-    "🌸 'Doctors are the soldiers of health... fighting invisible battles daily.'",
-    "🌸 'A good doctor knows when to heal, when to comfort, and when to just listen.'",
-    "🌸 'Thank you Akka for being our strength and hope.'"
-  ];
-
-  let qIndex = 0;
-  function showNextQuote() {
-    if (qIndex < quotesList.length) {
-      const quote = document.createElement('div');
-      quote.className = 'quote';
-      quote.textContent = quotesList[qIndex];
-      quote.style.animationDelay = (qIndex * 2) + 's';
-      document.getElementById('quotes').appendChild(quote);
-      qIndex++;
-      setTimeout(showNextQuote, 2000);
+  function typeWriter() {
+    if (index < text.length) {
+      document.getElementById('typeText').innerHTML += text.charAt(index);
+      index++;
+      setTimeout(typeWriter, 35);
     }
   }
-  showNextQuote();
+  typeWriter();
 
-  // Unmute music on first tap
-  const music = document.getElementById('bgMusic');
-  document.body.addEventListener('click', function enableMusic() {
-    music.muted = false;
-    music.play();
-    document.body.removeEventListener('click', enableMusic);
-  });
+  // Confetti burst on load
+  window.onload = () => {
+    confetti({
+      particleCount: 200,
+      spread: 120,
+      origin: { y: 0.6 }
+    });
+  };
+
+  // Floating white particles
+  setInterval(() => {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (Math.random() * 4 + 6) + 's';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 9000);
+  }, 400);
+
+  // Floating emojis (❤️, ✨, 😊)
+  const emojis = ['❤️', '✨', '😊'];
+  setInterval(() => {
+    const emoji = document.createElement('div');
+    emoji.className = 'emoji';
+    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    emoji.style.left = Math.random() * 100 + 'vw';
+    emoji.style.fontSize = (Math.random() * 10 + 20) + 'px';
+    emoji.style.animationDuration = (Math.random() * 3 + 5) + 's';
+    document.body.appendChild(emoji);
+    setTimeout(() => emoji.remove(), 7000);
+  }, 700);
+
 </script>
 
 </body>
