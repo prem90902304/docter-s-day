@@ -217,6 +217,24 @@
     document.body.appendChild(emoji);
     setTimeout(() => emoji.remove(), 7000);
   }, 700);
+
+   // Stop music when leaving the page
+  window.addEventListener('beforeunload', function() {
+    music.pause();
+    music.currentTime = 0;
+  });
+    <p style="
+    position: fixed;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: #888;
+    opacity: 0.8;
+    margin: 0;
+  ">
+    Developed by Prem ❤️
+  </p>
   
 </script>
 
