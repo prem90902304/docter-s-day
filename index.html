@@ -57,6 +57,24 @@
       transform: scale(1.05);
     }
 
+    .music-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      background-color: #d81b60;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 8px #d81b60;
+    }
+
+    .music-btn:hover {
+      background-color: #ad1457;
+      box-shadow: 0 0 12px #ad1457;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.9); }
       to { opacity: 1; transform: scale(1); }
@@ -106,10 +124,12 @@
 <body>
 
 <img src="doctor-day-banner.png" alt="Happy Doctor's Day">
-
 <h2>For the one who heals hearts and lives... ❤️</h2>
 
 <a href="page2.html" class="btn">Click for a Doctor’s Day Surprise 🎉</a>
+
+<audio id="bgMusic" src="doctor-music.mp3" autoplay loop></audio>
+<button onclick="toggleMusic()" class="music-btn">Toggle Music 🎵</button>
 
 <script>
   // Floating hearts generator
@@ -121,31 +141,12 @@
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 5000);
   }, 500);
-</script>
 
-  <audio id="bgMusic" src="doctor-music.mp3" autoplay loop></audio>
-
-<button onclick="toggleMusic()" style="
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  background-color: #d81b60;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 0 8px #d81b60;
-">Toggle Music 🎵</button>
-
-<script>
+  // Music toggle
   const music = document.getElementById('bgMusic');
   function toggleMusic() {
-    if (music.paused) {
-      music.play();
-    } else {
-      music.pause();
-    }
+    if (music.paused) music.play();
+    else music.pause();
   }
 </script>
 
