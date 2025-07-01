@@ -114,30 +114,9 @@
     .heart::after { left: -7.5px; top: 0; }
 
     @keyframes floatUp {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-800px) scale(1.5);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-800px) scale(1.5); opacity: 0; }
     }
-      <p style="
-    position: fixed;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 10px;
-    color: #888;
-    opacity: 0.7;
-    margin: 0;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-  ">
-    Click anywhere on page for music 🎵
-  </p>
-    
   </style>
 </head>
 <body>
@@ -152,8 +131,8 @@
 
 <button onclick="toggleMusic()" class="music-btn">Toggle Music 🎵</button>
 
+<!-- ✅ Floating hearts -->
 <script>
-  // Floating hearts generator
   setInterval(() => {
     const heart = document.createElement('div');
     heart.className = 'heart';
@@ -174,19 +153,33 @@
     }
   }
 
-  // Auto unmute on first user click (mobile autoplay fix)
   document.body.addEventListener('click', function enableMusic() {
     music.muted = false;
     music.play();
     document.body.removeEventListener('click', enableMusic);
   });
 
-  // Stop music when leaving the page
   window.addEventListener('beforeunload', function() {
     music.pause();
     music.currentTime = 0;
   });
 </script>
+
+<!-- ✅ Right-Center Vertical Small Message -->
+<p style="
+  position: fixed;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: #888;
+  opacity: 0.7;
+  margin: 0;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+">
+  Click anywhere on page for music 🎵
+</p>
 
 <!-- ✅ Developed by Prem -->
 <p style="
@@ -199,7 +192,7 @@
   opacity: 0.8;
   margin: 0;
 ">
-  Developed by Prem 
+  Developed by Prem ❤️
 </p>
 
 </body>
