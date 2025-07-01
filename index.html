@@ -16,6 +16,7 @@
       height: 100vh;
       overflow: hidden;
       font-family: Arial, sans-serif;
+      position: relative;
     }
 
     img {
@@ -35,23 +36,24 @@
     }
 
     .btn {
-      margin-top: 20px;
-      margin-left: 20px; /* ✅ This moves the button slightly to the right */
-      padding: 12px 25px;
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      padding: 8px 16px;
       background-color: #d81b60;
       color: white;
       border: none;
-      border-radius: 25px;
-      font-size: 1rem;
+      border-radius: 20px;
+      font-size: 14px;
       cursor: pointer;
       text-decoration: none;
-      box-shadow: 0 0 10px #d81b60;
+      box-shadow: 0 0 8px #d81b60;
       transition: all 0.3s ease;
     }
 
     .btn:hover {
       background-color: #ad1457;
-      box-shadow: 0 0 20px #ad1457;
+      box-shadow: 0 0 15px #ad1457;
       transform: scale(1.05);
     }
 
@@ -119,6 +121,32 @@
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 5000);
   }, 500);
+</script>
+
+  <audio id="bgMusic" src="doctor-music.mp3" autoplay loop></audio>
+
+<button onclick="toggleMusic()" style="
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #d81b60;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 8px #d81b60;
+">Toggle Music 🎵</button>
+
+<script>
+  const music = document.getElementById('bgMusic');
+  function toggleMusic() {
+    if (music.paused) {
+      music.play();
+    } else {
+      music.pause();
+    }
+  }
 </script>
 
 </body>
