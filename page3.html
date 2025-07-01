@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thank You Akka ❤️</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f8bbd0, #f48fb1, #f06292);
+      background-size: 600% 600%;
+      animation: gradient 10s ease infinite;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: white;
+      font-size: 3rem;
+      margin: 20px;
+      text-shadow: 2px 2px 8px #d81b60;
+      animation: fadeIn 3s ease-out;
+    }
+
+    .quote {
+      color: white;
+      font-size: 1.4rem;
+      margin: 15px;
+      max-width: 80%;
+      opacity: 0;
+      animation: fadeInQuote 3s ease-in-out forwards;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInQuote {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background-color: #ff4081;
+      left: 50%;
+      top: 100vh;
+      transform: translateX(-50%) rotate(45deg);
+      animation: floatUp 8s linear infinite;
+      opacity: 0.6;
+      z-index: 1;
+    }
+
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff4081;
+      border-radius: 50%;
+    }
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: -10px; top: 0; }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-1000px) scale(1.5); opacity: 0; }
+    }
+
+    .back-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 18px;
+      background-color: #d81b60;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      text-decoration: none;
+      box-shadow: 0 0 8px #d81b60;
+      cursor: pointer;
+      z-index: 999;
+    }
+    .back-btn:hover {
+      background-color: #ad1457;
+      box-shadow: 0 0 12px #ad1457;
+    }
+  </style>
+</head>
+<body>
+
+<h1>❤️ Thank You Akka ❤️</h1>
+
+<div id="quotes"></div>
+
+<audio id="bgMusic" src="doctor-ending.mp3" autoplay loop></audio>
+
+<a href="index.html" class="back-btn">⬅️ Home</a>
+
+<script>
+  // Confetti rain
+  function confettiRain() {
+    const duration = 8000;
+    const end = Date.now() + duration;
+
+    (function frame() {
+      confetti({
+        particleCount: 3,
+        angle: 90,
+        spread: 360,
+        origin: { x: Math.random(), y: Math.random() / 2 },
+      });
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    })();
+  }
+  confettiRain();
+
+  // Floating hearts
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 9000);
+  }, 600);
+
+  // Inspirational Quotes fade-in
+  const quotesList = [
+    "🌸 'Wherever the art of medicine is loved, there is also love for humanity.'",
+    "🌸 'Doctors are the soldiers of health... fighting invisible battles daily.'",
+    "🌸 'A good doctor knows when to heal, when to comfort, and when to just listen.'",
+    "🌸 'Thank you Akka for being our strength and hope.'"
+  ];
+
+  let qIndex = 0;
+  function showNextQuote() {
+    if (qIndex < quotesList.length) {
+      const quote = document.createElement('div');
+      quote.className = 'quote';
+      quote.textContent = quotesList[qIndex];
+      quote.style.animationDelay = (qIndex * 2) + 's';
+      document.getElementById('quotes').appendChild(quote);
+      qIndex++;
+      setTimeout(showNextQuote, 2000);
+    }
+  }
+  showNextQuote();
+
+  // Unmute music on first tap
+  const music = document.getElementById('bgMusic');
+  document.body.addEventListener('click', function enableMusic() {
+    music.muted = false;
+    music.play();
+    document.body.removeEventListener('click', enableMusic);
+  });
+</script>
+
+</body>
+</html>
