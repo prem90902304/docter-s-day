@@ -22,14 +22,14 @@
 
     h1 {
       color: #d81b60;
-      font-size: 1.5rem; /* Reduced from 2.5rem */
+      font-size: 1.5rem;
       margin: 20px;
       white-space: pre-wrap;
     }
 
     p {
       color: #333;
-      font-size: 0.7rem; /* Reduced from 1.2rem */
+      font-size: 0.7rem;
       margin-top: 10px;
       max-width: 80%;
     }
@@ -107,7 +107,7 @@
 
 <img src="doctor-surprise.png" alt="Surprise Image">
 
-<audio id="surpriseMusic" src="doctor-surprise.mp3" autoplay loop></audio>
+<audio id="surpriseMusic" src="doctor-surprise.mp3" autoplay loop muted></audio>
 
 <a href="index.html" class="back-btn">⬅️ Back</a>
 <a href="page3.html" class="back-btn" style="bottom: 70px;">➡️ Next Surprise</a>
@@ -165,25 +165,27 @@
     music.play();
     document.body.removeEventListener('click', enableMusic);
   });
+
   // Stop music when leaving the page
   window.addEventListener('beforeunload', function() {
     music.pause();
     music.currentTime = 0;
   });
-    <p style="
-    position: fixed;
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.7rem;
-    color: #888;
-    opacity: 0.8;
-    margin: 0;
-  ">
-    Developed by Prem ❤️
-  </p>
-
 </script>
+
+<!-- ✅ Developed by Prem -->
+<p style="
+  position: fixed;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: #888;
+  opacity: 0.8;
+  margin: 0;
+">
+  Developed by Prem ❤️
+</p>
 
 </body>
 </html>
