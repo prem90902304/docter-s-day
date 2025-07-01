@@ -33,10 +33,11 @@
       color: #d81b60;
       font-size: 1.4rem;
       animation: fadeInText 3s ease-in-out infinite alternate;
+      text-align: center;
     }
 
     .btn {
-      position: absolute;
+      position: fixed;  /* ✅ Fixed so it always stays visible */
       bottom: 20px;
       right: 20px;
       padding: 8px 16px;
@@ -49,6 +50,7 @@
       text-decoration: none;
       box-shadow: 0 0 8px #d81b60;
       transition: all 0.3s ease;
+      z-index: 999;
     }
 
     .btn:hover {
@@ -58,7 +60,7 @@
     }
 
     .music-btn {
-      position: absolute;
+      position: fixed;
       top: 20px;
       right: 20px;
       padding: 8px 12px;
@@ -68,6 +70,7 @@
       color: white;
       cursor: pointer;
       box-shadow: 0 0 8px #d81b60;
+      z-index: 999;
     }
 
     .music-btn:hover {
@@ -96,6 +99,7 @@
       transform: translateX(-50%) rotate(45deg);
       animation: floatUp 5s linear infinite;
       opacity: 0.6;
+      z-index: 1;
     }
 
     .heart::before, .heart::after {
@@ -124,11 +128,13 @@
 <body>
 
 <img src="doctor-day-banner.png" alt="Happy Doctor's Day">
+
 <h2>For the one who heals hearts and lives... ❤️</h2>
 
 <a href="page2.html" class="btn">Click for a Doctor’s Day Surprise 🎉</a>
 
-<audio id="bgMusic" src="doctor-music.mp3" autoplay loop></audio>
+<audio id="bgMusic" src="doctor-music.mp3" autoplay loop muted></audio>
+
 <button onclick="toggleMusic()" class="music-btn">Toggle Music 🎵</button>
 
 <script>
@@ -142,12 +148,23 @@
     setTimeout(() => heart.remove(), 5000);
   }, 500);
 
-  // Music toggle
   const music = document.getElementById('bgMusic');
+
   function toggleMusic() {
-    if (music.paused) music.play();
-    else music.pause();
+    if (music.paused) {
+      music.muted = false;
+      music.play();
+    } else {
+      music.pause();
+    }
   }
+
+  // Auto unmute on first user click anywhere (to bypass mobile autoplay block)
+  document.body.addEventListener('click', function enableMusic() {
+    music.muted = false;
+    music.play();
+    document.body.removeEventListener('click', enableMusic);
+  });
 </script>
 
 </body>
