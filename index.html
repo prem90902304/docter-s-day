@@ -37,7 +37,7 @@
     }
 
     .btn {
-      position: fixed;  /* ✅ Fixed so it always stays visible */
+      position: fixed;
       bottom: 20px;
       right: 20px;
       padding: 8px 16px;
@@ -159,30 +159,33 @@
     }
   }
 
-  // Auto unmute on first user click anywhere (to bypass mobile autoplay block)
+  // Auto unmute on first user click (mobile autoplay fix)
   document.body.addEventListener('click', function enableMusic() {
     music.muted = false;
     music.play();
     document.body.removeEventListener('click', enableMusic);
   });
-   // Stop music when leaving the page
+
+  // Stop music when leaving the page
   window.addEventListener('beforeunload', function() {
     music.pause();
     music.currentTime = 0;
   });
-    <p style="
-    position: fixed;
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.7rem;
-    color: #888;
-    opacity: 0.8;
-    margin: 0;
-  ">
-    Developed by Prem ❤️
-  </p>
 </script>
+
+<!-- ✅ Developed by Prem -->
+<p style="
+  position: fixed;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: #888;
+  opacity: 0.8;
+  margin: 0;
+">
+  Developed by Prem 
+</p>
 
 </body>
 </html>
