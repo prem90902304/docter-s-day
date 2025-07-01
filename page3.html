@@ -109,26 +109,6 @@
       100% { transform: translateY(-800px) scale(1.5); opacity: 0; }
     }
 
-    .music-controls {
-      position: fixed;
-      bottom: 70px;
-      right: 20px;
-      display: flex;
-      gap: 8px;
-      z-index: 999;
-    }
-
-    .music-controls button {
-      background-color: #d81b60;
-      border: none;
-      color: white;
-      padding: 6px 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      box-shadow: 0 0 6px #d81b60;
-    }
-
     .back-btn {
       position: fixed;
       bottom: 20px;
@@ -162,6 +142,20 @@
 
 <a href="index.html" class="back-btn">⬅️ Home</a>
 
+<!-- Developed by Prem -->
+<p style="
+  position: fixed;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: #888;
+  opacity: 0.8;
+  margin: 0;
+">
+  Developed by Prem ❤️
+</p>
+
 <script>
   const text = "Dear Akka,\n\nOn this special Doctor’s Day…\n\nWe just want to pause… and say…\n\nThank you for every sleepless night…\nFor every patient you healed…\nFor every smile you brought to worried faces…\n\nYou’re not just our doctor… You’re our blessing… our pride… our heartbeat ❤️\n\nStay amazing always!";
 
@@ -183,8 +177,6 @@
       startVelocity: 45,
       origin: { y: 0.6 }
     });
-
-    // Optional: Secondary burst after 2 seconds
     setTimeout(() => {
       confetti({
         particleCount: 150,
@@ -218,24 +210,19 @@
     setTimeout(() => emoji.remove(), 7000);
   }, 700);
 
-   // Stop music when leaving the page
+  // Music auto-unmute on first click
+  const music = document.getElementById('bgMusic');
+  document.body.addEventListener('click', function enableMusic() {
+    music.muted = false;
+    music.play();
+    document.body.removeEventListener('click', enableMusic);
+  });
+
+  // Stop music when leaving the page
   window.addEventListener('beforeunload', function() {
     music.pause();
     music.currentTime = 0;
   });
-    <p style="
-    position: fixed;
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.7rem;
-    color: #888;
-    opacity: 0.8;
-    margin: 0;
-  ">
-    Developed by Prem ❤️
-  </p>
-  
 </script>
 
 </body>
