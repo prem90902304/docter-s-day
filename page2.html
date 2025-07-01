@@ -12,10 +12,9 @@
       font-family: 'Arial', sans-serif;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-      height: 100vh;
-      overflow: hidden;
+      min-height: 100vh;
       background-color: #fff0f5;
       text-align: center;
       animation: colorFlash 3s infinite alternate;
@@ -132,7 +131,8 @@
   blastConfetti();
 
   // Typewriter effect
-  const text = "💖 Happy Doctor’s Day Akka! 💖\n\nThank you for healing lives & hearts.\nYou are Loved... Respected... and Celebrated Today! 🎉";
+  const text = "💖 Happy Doctor’s Day Akka! 💖\n\n🌸 Not all superheroes wear capes… some wear white coats and carry stethoscopes.\n\n🌸 The world needs more healers like you… but we’re blessed to have you as our own Akka...";
+
   let index = 0;
   function typeWriter() {
     if (index < text.length) {
@@ -142,7 +142,7 @@
     } else {
       // After typing ends, show final message
       setTimeout(() => {
-        document.getElementById('typeText').innerHTML += "\n\n❤️ Thank You for Healing Hearts and Lives! ❤️";
+        document.getElementById('typeText').innerHTML += "\n\n❤️ Happy Doctor’s Day to the most caring, strong, and inspiring person in our lives… You! ❤️";
       }, 500);
     }
   }
